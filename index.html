@@ -46,13 +46,11 @@ function eraseCookie(name) {
         if (checkbox.checked == true) {
           trans();
           document.documentElement.setAttribute('data-theme', 'dark')
-          alert('true');
           createCookie('darkmode', 'darkmodeisactive', 1);
           
           }else{
             trans();
           document.documentElement.setAttribute('data-theme', 'light')
-          alert('false')
           eraseCookie('darkmode')
         }
       });
@@ -63,19 +61,7 @@ function eraseCookie(name) {
           checkbox.checked = false;
           document.documentElement.setAttribute('data-theme', 'light')
         }
-        /*
-        if(this.checked){
-          trans();
-          document.documentElement.setAttribute('data-theme', 'dark')
-        }else{
-        if(this.checked){
-          trans();
-          document.documentElement.setAttribute('data-theme', 'dark')
-        }else{
-          trans();
-          document.documentElement.setAttribute('data-theme', 'light')
-        }
-      */
+        
       let trans = () => {
         document.documentElement.classList.add('transition');
        window.setTimeout( () => {
