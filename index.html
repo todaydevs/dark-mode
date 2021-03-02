@@ -16,8 +16,58 @@
       <p>Hi, in this tutorials I will show you how to make a dark mode for your website!</p>
     </div>
     <script>
+    function createCookie(name,value,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+value+expires+"; path=/";
+}
+
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+function eraseCookie(name) {
+	createCookie(name,"",-1);
+}
       let checkbox = document.querySelector('input[name=theme]');
       checkbox.addEventListener('change', function (){
+        
+        if (checkbox.checked == true) {
+          trans();
+          document.documentElement.setAttribute('data-theme', 'dark')
+          alert('true');
+          createCookie('darkmode', 'darkmodeisactive', 1);
+          
+          }else{
+            trans();
+          document.documentElement.setAttribute('data-theme', 'light')
+          alert('false')
+          eraseCookie('darkmode')
+        }
+      });
+        if(readCookie('darkmode')){
+          checkbox.checked = true;
+          document.documentElement.setAttribute('data-theme', 'dark')
+        }else{
+          checkbox.checked = false;
+          document.documentElement.setAttribute('data-theme', 'light')
+        }
+        /*
+        if(this.checked){
+          trans();
+          document.documentElement.setAttribute('data-theme', 'dark')
+        }else{
         if(this.checked){
           trans();
           document.documentElement.setAttribute('data-theme', 'dark')
@@ -25,14 +75,14 @@
           trans();
           document.documentElement.setAttribute('data-theme', 'light')
         }
-      });
-      
+      */
       let trans = () => {
         document.documentElement.classList.add('transition');
        window.setTimeout( () => {
          document.documentElement.classList.remove('transition')
        }, 1000);
-      }
+      };
+      
     </script>
   </body>
 </html>
